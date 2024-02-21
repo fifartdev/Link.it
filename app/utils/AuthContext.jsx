@@ -1,6 +1,6 @@
 'use client'
 import { useContext, createContext, useState, useEffect } from "react"
-import { account } from "../libs/appwrite"
+import { account, functions } from "../libs/appwrite"
 import { useRouter } from "next/navigation"
 
 
@@ -42,14 +42,23 @@ export const AuthProvider = ({children}) => {
         
     }
     
-    
+    const handleFunctionExecute = async () => {
+        try {
+            const result = await functions.createExecution('65d25a9f327bd4b10a23')
+            console.log('Results: ', result.responseBody);
+        } catch (error) {
+            console.error(error);
+        }
+        
+    }
     
 
     const data = {
         user,
         handleLogout,
         handleLoginWithGithub,
-        handleLoginWithGoogle
+        handleLoginWithGoogle,
+        handleFunctionExecute
     }
     
     
