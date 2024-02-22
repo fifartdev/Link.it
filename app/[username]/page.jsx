@@ -48,9 +48,9 @@ const userPage = ({params}) => {
         <h1 className="text-3xl font-bold mb-8 border-b-2 border-white"><Link href={`/${params.username}`}>{params.username}</Link></h1>
         
         <ul>
-        {links ? links.map((l)=>{
+        {links.length > 0 ? links.map((l)=>{
             return <li><Link href={l.url} target='_blank'>{l.name}</Link></li>
-        }) : <li>No Links in this account</li> }
+        }) : <li>No Active Links Found in this Account</li> }
         </ul>
         </>    
         
