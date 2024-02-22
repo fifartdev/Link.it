@@ -43,15 +43,15 @@ export const AuthProvider = ({children}) => {
     },[])
     const handleLoginWithGithub =  () => {
        account.createOAuth2Session('github',
+        process.env.NEXT_PUBLIC_DASHBOARD_URL,
         process.env.NEXT_PUBLIC_URL,
-        process.env.NEXT_PUBLIC_DASHBOARD_URL
         )
       }
     
       const handleLoginWithGoogle = () => {
         account.createOAuth2Session('google',
+        process.env.NEXT_PUBLIC_DASHBOARD_URL,
         process.env.NEXT_PUBLIC_URL,
-        process.env.NEXT_PUBLIC_DASHBOARD_URL
         )
       }
     
