@@ -10,7 +10,7 @@ const userPage = ({params}) => {
     const [loading, setLoading] = useState(false)
     const { user } = useAuth()
 
-    console.log(params);
+    //console.log(params);
     const router = useRouter()
     const goBack = async () => {
         router.push('/dashboard')
