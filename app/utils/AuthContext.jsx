@@ -43,15 +43,15 @@ export const AuthProvider = ({children}) => {
     },[])
     const handleLoginWithGithub =  () => {
        account.createOAuth2Session('github',
-        'http://localhost:3000/dashboard',
-        'http://localhost:3000'
+        process.env.NEXT_PUBLIC_URL,
+        process.env.NEXT_PUBLIC_DASHBOARD_URL
         )
       }
     
       const handleLoginWithGoogle = () => {
         account.createOAuth2Session('google',
-        'http://localhost:3000/dashboard',
-        'http://localhost:3000'
+        process.env.NEXT_PUBLIC_URL,
+        process.env.NEXT_PUBLIC_DASHBOARD_URL
         )
       }
     
