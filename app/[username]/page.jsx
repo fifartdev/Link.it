@@ -1,7 +1,7 @@
 'use client'
 import { useRouter } from "next/navigation";
 import { useAuth } from "../utils/AuthContext";
-import { COL_LINKS, DB, db, Query } from "../libs/appwrite"
+import { COL_LINKS, COL_ACCOUNT, DB, db, Query } from "../libs/appwrite"
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
@@ -9,6 +9,7 @@ const userPage = ({params}) => {
     const [links,setLinks] = useState([])
     const [loading, setLoading] = useState(false)
     const { user } = useAuth()
+    const [accountExist, setAccountExist] = useState(false)
 
     //console.log(params);
     const router = useRouter()
@@ -23,10 +24,24 @@ const userPage = ({params}) => {
         setLoading(false)
     }
 
+    const getAccountData = async () => {
+        
+        const resultAccount = (await db.listDocuments(DB, COL_ACCOUNT, [Query.equal('name',[params.username])])).documents
+        if (resultAccount.length > 0 ) { return setAccountExist(true)}
+       
+    }
+
     useEffect(()=>{
         getLinks()
         //console.log(links);
     },[])
+
+    useEffect(()=>{
+        getAccountData()
+    },[])
+
+  
+
 
   if(loading)
   return (
@@ -41,7 +56,10 @@ const userPage = ({params}) => {
 
     )
 
-    
+    if (!accountExist)
+    return(
+      <h1 className="text-xl font-bold mb-8 border-b-2 border-white">No Account Found under these DATA</h1>
+      ) 
   return (
         <>
         {user && <button className="bg-black text-white p-2 rounded-sm" onClick={goBack}>Add More Links</button>}
@@ -56,6 +74,7 @@ const userPage = ({params}) => {
         
        
   )
+  
 }
 
 export default userPage
